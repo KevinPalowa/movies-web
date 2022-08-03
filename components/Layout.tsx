@@ -8,14 +8,14 @@ interface Props {
 }
 const Layout: NextPage<Props> = ({ children, title }) => {
   return (
-    <div className="bg-dark">
+    <div className="bg-dark text-white">
       <Head>
         <title>{title}</title>
       </Head>
       <nav>
         <NavBar />
       </nav>
-      <main className='max-w-4xl mx-auto'>{children}</main>
+      <main className="max-w-4xl mx-auto">{children}</main>
     </div>
   );
 };
