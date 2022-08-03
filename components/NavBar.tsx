@@ -5,7 +5,6 @@ import { NextRouter, useRouter } from "next/router";
 const NavLink = ({ children, href }: { children: string; href: string }) => {
   const router: NextRouter = useRouter();
   const isActive = router.asPath === href;
-  console.log(router.pathname);
   return (
     <Link href={href} className="bg-blue-100">
       <a
