@@ -17,11 +17,7 @@ const NowPlaying: NextPage = () => {
   };
   const [data, setData] = useState<dataProps>();
   useEffect(() => {
-    axios
-      .get(
-        "https://api.themoviedb.org/3/movie/now_playing?api_key=1f26fdf0794ccc45f920074433eb11c6&language=en-US&page=1"
-      )
-      .then((res) => setData(res.data));
+    axios.get(`/api/now-playing`).then((res) => setData(res.data));
   }, []);
   return (
     <>
