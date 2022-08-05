@@ -21,7 +21,9 @@ const NavBar: NextPage = () => {
   return (
     <div className="bg-[#2c3440] py-3">
       <div className="max-w-4xl w-full flex justify-between mx-auto">
-        <h2 className="text-3xl font-bold">Movies</h2>
+        <Link href="/">
+          <a className="text-3xl font-bold">Movies</a>
+        </Link>
         <ul className="space-x-3 flex items-center">
           <NavLink href="/movies">Movies</NavLink>
           <NavLink href="/popular">Popular</NavLink>
