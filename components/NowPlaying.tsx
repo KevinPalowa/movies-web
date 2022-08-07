@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 const NowPlaying: NextPage = () => {
+  const [isLoading, setIsLoading] = useState(true);
   type MovieType = {
     id: number;
     title: string;
@@ -18,6 +19,7 @@ const NowPlaying: NextPage = () => {
   const [data, setData] = useState<dataProps>();
   useEffect(() => {
     axios.get(`/api/now-playing`).then((res) => setData(res.data));
+    setIsLoading(false);
   }, []);
   return (
     <>
@@ -25,14 +27,16 @@ const NowPlaying: NextPage = () => {
         <p className="text-gray-400 text-sm">NOW PLAYING</p>
       </div>
       <div className="mt-3 grid grid-cols-6 gap-3 ">
-        {data?.results.map((movie: MovieType) => (
-          <Card
-            title={movie.title}
-            id={movie.id}
-            src={movie.poster_path}
-            key={movie.id}
-          />
-        ))}
+        {!isLoading
+          ? data?.results.map((movie: MovieType) => (
+              <Card
+                title={movie.title}
+                id={movie.id}
+                src={movie.poster_path}
+                key={movie.id}
+              />
+            ))
+          : "Loading..."}
       </div>
     </>
   );

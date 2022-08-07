@@ -20,7 +20,7 @@ const Card: NextPage<Props> = ({ id, src, title }) => {
         <Image
           objectFit="cover"
           layout="fill"
-          src={`https://image.tmdb.org/t/p/w500${src}`}
+          src={`https://image.tmdb.org/t/p/w185${src}`}
           alt={title}
         />
         {isHover ? (

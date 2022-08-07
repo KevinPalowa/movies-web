@@ -16,13 +16,12 @@ type Props = {
   };
 };
 const Movie: NextPage<Props> = ({ data }) => {
-  console.log(data);
   return (
     <Layout title={data.title}>
       <div className="flex space-x-10">
         <div className="w-1/4 h-80">
           <PosterImage
-            src={`https://image.tmdb.org/t/p/original${data?.poster_path}`}
+            src={`https://image.tmdb.org/t/p/w300${data?.poster_path}`}
             alt={data.title}
           />
         </div>
