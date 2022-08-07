@@ -15,7 +15,7 @@ const Card: NextPage<Props> = ({ id, src, title }) => {
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        className="bg-red-100 h-48 relative border-2 border-gray-500 hover:border-green-400 hover:border-4"
+        className="cursor-pointer bg-red-100 h-48 relative border-2 border-gray-500 hover:border-green-400 hover:border-4"
       >
         <Image
           objectFit="cover"
