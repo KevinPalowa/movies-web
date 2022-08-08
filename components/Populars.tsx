@@ -19,7 +19,6 @@ const Populars: NextPage = () => {
   useEffect(() => {
     axios.get(`/api/populars`).then((res) => setData(res.data));
   }, []);
-  console.log(process.env.NEXT_API_KEY);
   return (
     <>
       <div className="border-b border-b-gray-700 pb-1">
