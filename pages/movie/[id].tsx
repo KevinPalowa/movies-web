@@ -16,6 +16,7 @@ type Props = {
   };
 };
 const Movie: NextPage<Props> = ({ data }) => {
+  console.log(data);
   return (
     <Layout title={data.title}>
       <div className="flex space-x-10">

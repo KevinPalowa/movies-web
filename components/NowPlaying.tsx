@@ -2,21 +2,10 @@ import axios from "axios";
 import { NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import { MovieType, DataProps } from "../lib/type";
 const NowPlaying: NextPage = () => {
   const [isLoading, setIsLoading] = useState(true);
-  type MovieType = {
-    id: number;
-    title: string;
-    poster_path: string;
-  };
-  type dataProps = {
-    dates: { maximum: string; minimum: string };
-    page: number;
-    results: [];
-    total_pages: number;
-    total_results: 1444;
-  };
-  const [data, setData] = useState<dataProps>();
+  const [data, setData] = useState<DataProps>();
   useEffect(() => {
     axios.get(`/api/now-playing`).then((res) => setData(res.data));
     setIsLoading(false);

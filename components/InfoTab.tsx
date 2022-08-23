@@ -3,6 +3,7 @@ import React, { useState } from "react";
 
 const InfoTab = ({ data }: any) => {
   const [activeTab, setActiveTab] = useState("cast");
+  console.log(data);
   return (
     <div>
       <div className="flex space-x-5">
