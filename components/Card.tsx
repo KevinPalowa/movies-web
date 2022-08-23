@@ -15,7 +15,7 @@ const Card: NextPage<Props> = ({ id, src, title }) => {
       <div
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        className="box-border cursor-pointer h-56 rounded-md relative border-2 border-gray-500 hover:border-green-400 hover:border-4"
+        className="cursor-pointer h-56 rounded-md relative border-2 border-gray-500 transition hover:border-green-400 hover:border-[2px]"
       >
         {src !== null ? (
           <Image

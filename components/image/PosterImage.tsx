@@ -7,9 +7,15 @@ const PosterImage = ({ src, alt }: any) => {
     <div
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
-      className="bg-red-100 h-full relative border-2 border-gray-500 hover:border-green-400 hover:border-4 w-full"
+      className="cursor-pointer h-full rounded-md relative border-2 border-gray-500 transition hover:border-green-400 hover:border-[2px]"
     >
-      <Image objectFit="cover" layout="fill" src={src} alt={alt} />
+      <Image
+        className="rounded-md"
+        objectFit="cover"
+        layout="fill"
+        src={src}
+        alt={alt}
+      />
       {isHover ? (
         <div className="absolute bg-black/50 w-full bottom-0 justify-center space-x-2 flex py-1">
           <FiEye size={"20px"} />

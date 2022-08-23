@@ -1,16 +1,23 @@
 import Link from "next/link";
 import React, { useState } from "react";
+import { MovieType } from "../lib/type";
+
+const TabLists = ({ children }: { children: React.ReactNode }) => {
+  return (
+    <div className="flex space-x-5 border-b border-gray-600">{children}</div>
+  );
+};
 
 const InfoTab = ({ data }: any) => {
   const [activeTab, setActiveTab] = useState("cast");
-  console.log(data);
   return (
     <div>
-      <div className="flex space-x-5">
+      <TabLists>
         <p
           className={`
             ${
-              activeTab === "cast" && "text-green-500 border-b border-white"
+              activeTab === "cast" &&
+              "hover: text-green-500 border-b border-green-500"
             } cursor-pointer`}
           onClick={() => setActiveTab("cast")}
         >
@@ -24,7 +31,7 @@ const InfoTab = ({ data }: any) => {
         >
           Genres
         </p>
-      </div>
+      </TabLists>
       <div className="flex mt-3 w-full flex-wrap">
         {activeTab === "cast"
           ? data.credits.cast.map((cast: { id: number; name: string }) => (

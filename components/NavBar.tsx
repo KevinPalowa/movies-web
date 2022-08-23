@@ -20,14 +20,7 @@ const NavLink = ({ children, href }: { children: string; href: string }) => {
   );
 };
 
-const Modal = ({
-  user,
-  isActive,
-}: {
-  user: { picture: string; email: string; name: string };
-  isActive: boolean;
-}) => {
-  console.log(isActive);
+const Modal = ({ user, isActive }: any) => {
   return (
     <div
       className={`absolute top-14 z-10 p-5 rounded-lg right-56 bg-[#2c3440] border border-gray-500 ${
@@ -77,12 +70,16 @@ const NavBar = () => {
                 className="flex items-center space-x-1 cursor-pointer"
               >
                 <div className="w-8 h-8 relative ">
-                  <Image
-                    className="rounded-full"
-                    src={user.picture}
-                    alt="profile picture"
-                    layout="fill"
-                  />
+                  {typeof user.picture === "string" ? (
+                    <Image
+                      className="rounded-full"
+                      src={user.picture}
+                      alt="profile picture"
+                      layout="fill"
+                    />
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <Modal isActive={isActive} user={user} />
