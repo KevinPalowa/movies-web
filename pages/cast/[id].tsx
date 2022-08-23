@@ -3,7 +3,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import PosterImage from "../../components/image/PosterImage";
 import axios from "axios";
-import { CastType } from "../../lib/type";
+import { CastType, MovieType } from "../../lib/type";
 import Card from "../../components/Card";
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const res = await axios.get(
@@ -22,7 +22,7 @@ const Cast: NextPage<CastType> = ({ data }) => {
           <p className="text-2xl font-bold">{data.name}</p>
 
           <div className="mt-3 grid grid-cols-4 gap-5 ">
-            {data.combined_credits.cast.map((movie) => (
+            {data.combined_credits.cast.map((movie: MovieType) => (
               <Card
                 title={movie.title}
                 id={movie.id}

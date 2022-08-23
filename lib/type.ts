@@ -37,6 +37,6 @@ export type CastType = {
     imdb_id: string;
     homepage: string | null;
     name: string;
-    combined_credits: [cast: [], crew: []];
+    combined_credits: { cast: []; crew: [] };
   };
 };
