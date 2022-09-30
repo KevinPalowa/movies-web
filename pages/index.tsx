@@ -1,12 +1,11 @@
 import type { NextPage } from "next";
+import Grid from "../components/Grid";
 import Layout from "../components/Layout";
-import NowPlaying from "../components/NowPlaying";
-import Populars from "../components/Populars";
 const Home: NextPage = () => {
   return (
     <Layout title="Home Page">
-      <NowPlaying />
-      <Populars />
+      <Grid title="Now Playing" fetchUrl="/api/now-playing" />
+      <Grid title="Populars" fetchUrl="/api/populars" />
     </Layout>
   );
 };
