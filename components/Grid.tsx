@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Card from "./Card";
+import Card from "./card/Card";
 import { MovieType, DataProps } from "../lib/type";
 type Props = {
   title: string;
   fetchUrl: string;
 };
-const NowPlaying = ({ title, fetchUrl }: Props) => {
+const Grid = ({ title, fetchUrl }: Props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<DataProps>();
   useEffect(() => {
@@ -16,7 +16,7 @@ const NowPlaying = ({ title, fetchUrl }: Props) => {
   return (
     <>
       <div className="border-b border-b-gray-700 pb-1">
-        <p className="text-gray-400 text-sm">{title}</p>
+        <p className="text-gray-400 text-lg">{title}</p>
       </div>
       <div className="mt-3 grid grid-cols-6 gap-3 ">
         {!isLoading
@@ -33,4 +33,4 @@ const NowPlaying = ({ title, fetchUrl }: Props) => {
     </>
   );
 };
-export default NowPlaying;
+export default Grid;
