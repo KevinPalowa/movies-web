@@ -28,7 +28,7 @@ const Movie: NextPage<Props> = ({ data }) => {
         </div>
         <div className="w-3/4">
           <p className="font-bold text-3xl">
-            {data.original_title}{" "}
+            {data.title}{" "}
             <span className="text-sm font-normal">
               {data.release_date.substring(4, 0)}
             </span>

@@ -4,7 +4,7 @@ import Layout from "../../components/Layout";
 import PosterImage from "../../components/image/PosterImage";
 import axios from "axios";
 import { CastType, MovieType } from "../../lib/type";
-import Card from "../../components/Card";
+import Card from "../../components/card/Card";
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const res = await axios.get(
     `https://api.themoviedb.org/3/person/${query.id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=combined_credits`
@@ -14,6 +14,10 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 };
 const Cast: NextPage<CastType> = ({ data }) => {
+  const sorted = data.combined_credits.cast.sort((a, b) => {
+    return b.popularity - a.popularity;
+  });
+  console.log(sorted);
   return (
     <Layout title={`Film starring ${data.name}`}>
       <div className="flex space-x-10">
@@ -22,7 +26,7 @@ const Cast: NextPage<CastType> = ({ data }) => {
           <p className="text-2xl font-bold">{data.name}</p>
 
           <div className="mt-3 grid grid-cols-4 gap-5 ">
-            {data.combined_credits.cast.map((movie: MovieType) => (
+            {sorted.map((movie: MovieType) => (
               <Card
                 title={movie.title}
                 id={movie.id}
@@ -36,7 +40,7 @@ const Cast: NextPage<CastType> = ({ data }) => {
           <PosterImage
             src={`https://image.tmdb.org/t/p/w300${data.profile_path}`}
           />
-          <p className="text-sm">{data.biography}</p>
+          <p className="text-sm h-14">{data.biography}</p>
         </div>
       </div>
     </Layout>

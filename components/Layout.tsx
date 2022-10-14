@@ -16,7 +16,7 @@ const Layout: NextPage<Props> = ({ children, title }) => {
       <nav>
         <NavBar />
       </nav>
-      <main className="max-w-4xl mx-auto py-5">{children}</main>
+      <main className="min-h-screen max-w-4xl mx-auto py-5">{children}</main>
       <Footer />
     </div>
   );
