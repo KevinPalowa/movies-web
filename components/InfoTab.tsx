@@ -1,6 +1,5 @@
 import Link from "next/link";
 import React, { useState } from "react";
-import { MovieType } from "../lib/type";
 
 const TabLists = ({ children }: { children: React.ReactNode }) => {
   return (

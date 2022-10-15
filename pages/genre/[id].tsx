@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import Card from "../../components/card/Card";
 import Layout from "../../components/Layout";
-
+import { MovieType, DataProps } from "../../lib/type";
 const Genre = () => {
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState<DataProps>();
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const { id } = router.query;
@@ -25,7 +25,7 @@ const Genre = () => {
           {/*   There are {movies.total_results} thrillers */}
           {/* </div> */}
           <div className="mt-3 grid grid-cols-5 gap-3 ">
-            {movies?.results.map((movie) => (
+            {movies?.results.map((movie: MovieType) => (
               <Card
                 title={movie.title}
                 id={movie.id}

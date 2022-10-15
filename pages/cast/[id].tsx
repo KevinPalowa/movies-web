@@ -14,10 +14,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   };
 };
 const Cast: NextPage<CastType> = ({ data }) => {
-  const sorted = data.combined_credits.cast.sort((a, b) => {
-    return b.popularity - a.popularity;
-  });
-  console.log(sorted);
+  const sorted = data.combined_credits.cast.sort(
+    (a: MovieType, b: MovieType) => {
+      return b.popularity - a.popularity;
+    }
+  );
   return (
     <Layout title={`Film starring ${data.name}`}>
       <div className="flex space-x-10">

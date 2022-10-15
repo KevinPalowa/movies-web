@@ -1,21 +1,23 @@
 import axios from "axios";
 import classNames from "classnames";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import Layout from "../../components/Layout";
-import Populars from "../../components/Populars";
+import Grid from "../../components/Grid";
+import requests from "../../lib/requests";
+import { MovieType } from "../../lib/type";
 const Home = () => {
   const [input, setInput] = useState("");
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState<Array<MovieType>>();
   const [isFocus, setIsFocus] = useState(false);
-  const [time, setTime] = useState();
+  const [time, setTime] = useState<any>();
   const searchMovie = async (query: string) => {
     try {
       const res = await axios.get(
         `https://api.themoviedb.org/3/search/movie?api_key=1f26fdf0794ccc45f920074433eb11c6&language=en-US&query=${query}&page=1&include_adult=false`
       );
 
-      const sorted = res.data.results.sort((a, b) => {
+      const sorted = res.data.results.sort((a: MovieType, b: MovieType) => {
         return b.popularity - a.popularity;
       });
       return sorted;
@@ -27,10 +29,11 @@ const Home = () => {
     clearTimeout(time);
     setInput(e.target.value);
     if (e.target.value.length === 0) {
-      setMovies(null);
+      setMovies([]);
     }
     setTime(
       setTimeout(async () => {
+        console.log("fetch");
         const data = await searchMovie(input);
         setMovies(data);
       }, 500)
@@ -71,7 +74,7 @@ const Home = () => {
           </ul>
         </div>
       </div>
-      <Populars />
+      <Grid title="Populars" fetchUrl={requests.requestPopular} />
     </Layout>
   );
 };

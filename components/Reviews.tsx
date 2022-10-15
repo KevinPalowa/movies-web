@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 const Reviews = () => {
-  const [data, setData] = useState();
+  const [data, setData] = useState(); // eslint-disable-line
   useEffect(() => {
     axios
       .get(
