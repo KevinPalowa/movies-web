@@ -10,7 +10,7 @@ const SearchBox = () => {
   const [isFocus, setIsFocus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [time, setTime] = useState<any>();
-  const parentRef = useRef(null);
+  const parentRef = useRef<HTMLDivElement>(null);
   useOutsideClick(parentRef, () => {
     setIsFocus(false);
   });
