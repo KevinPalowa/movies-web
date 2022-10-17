@@ -1,4 +1,4 @@
-import { RefObject, useEffect } from "react";
+import { RefObject, useEffect, useState } from "react";
 
 const useOutsideClick = (
   ref: RefObject<HTMLDivElement>,
@@ -19,4 +19,15 @@ const useOutsideClick = (
   }, [ref]);
 };
 
-export default useOutsideClick;
+function useHover<T extends HTMLElement>(ref: RefObject<T>): Boolean {
+  const [value, setValue] = useState<Boolean>(false);
+  const handleMouseEnter = () => setValue(true);
+  const handleMouseLeave = () => setValue(false);
+  if (ref.current) {
+    ref.current.addEventListener("mouseenter", handleMouseEnter);
+    ref.current.addEventListener("mouseleave", handleMouseLeave);
+  }
+  return value;
+}
+
+export { useOutsideClick, useHover };

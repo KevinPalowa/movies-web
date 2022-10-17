@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { FiEye, FiHeart } from "react-icons/fi";
 import Image from "next/image";
+import { useHover } from "../../lib/hooks";
 const PosterImage = ({ src, alt }: any) => {
-  const [isHover, setIsHover] = useState(false);
+  const hoverRef = useRef<HTMLDivElement>(null);
+  const isHover = useHover(hoverRef);
   return (
     <div
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
+      ref={hoverRef}
       className="cursor-pointer h-full rounded-md relative border-2 border-gray-500 transition hover:border-green-400 hover:border-[2px]"
     >
       <Image

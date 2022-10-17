@@ -1,20 +1,21 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import Image from "next/image";
 import { NextPage } from "next";
 import Link from "next/link";
 import Overlay from "./Overlay";
+import { useHover } from "../../lib/hooks";
 type Props = {
   src: string | null;
   title: string;
   id: number | string;
 };
 const Card: NextPage<Props> = ({ id, src, title }) => {
-  const [isHover, setIsHover] = useState(false);
+  const hoverRef = useRef<HTMLAnchorElement>(null);
+  const isHover = useHover(hoverRef);
   return (
     <Link href={`/movie/${id}`}>
       <a
-        onMouseEnter={() => setIsHover(true)}
-        onMouseLeave={() => setIsHover(false)}
+        ref={hoverRef}
         className="cursor-pointer h-56 rounded-md relative border-2 border-gray-500 transition hover:border-green-400 hover:border-[2px]"
       >
         {src !== null ? (

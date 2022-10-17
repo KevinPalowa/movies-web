@@ -2,8 +2,8 @@ import React, { useRef, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { MovieType } from "../lib/type";
-import useOutsideClick from "../lib/hooks";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useOutsideClick } from "../lib/hooks";
 const SearchBox = () => {
   const [input, setInput] = useState("");
   const [movies, setMovies] = useState<Array<MovieType>>();
