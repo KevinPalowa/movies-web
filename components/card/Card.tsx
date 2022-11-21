@@ -1,23 +1,17 @@
-import React, { useRef } from "react";
+import React from "react";
 import Image from "next/image";
-import { NextPage } from "next";
 import Link from "next/link";
 import Overlay from "./Overlay";
-import { useHover } from "../../lib/hooks";
 type Props = {
   src: string | null;
   title: string;
-  id: number | string;
+  id: number;
+  href: string;
 };
-const Card: NextPage<Props> = ({ id, src, title }) => {
-  const hoverRef = useRef<HTMLDivElement>(null);
-  const isHover = useHover(hoverRef);
+const Card = ({ id, src, title, href }: Props) => {
   return (
-    <div
-      ref={hoverRef}
-      className="cursor-pointer h-56 rounded-md relative border-2 border-gray-500 transition hover:border-green-400 hover:border-[2px]"
-    >
-      <Link href={`/movie/${id}`}>
+    <div className="group relative h-56 cursor-pointer rounded-md border-2 border-gray-500 transition-all hover:border-[2px] hover:border-green-400">
+      <Link href={href}>
         <a>
           {src !== null ? (
             <Image
@@ -28,20 +22,16 @@ const Card: NextPage<Props> = ({ id, src, title }) => {
               alt={title}
             />
           ) : (
-            <div className="bg-gray-800 w-full h-full font-bold rounded-md  text-center items-center flex justify-center">
+            <div className="flex h-full w-full items-center justify-center  rounded-md bg-gray-800 text-center font-bold">
               {title}
             </div>
           )}
         </a>
       </Link>
-      {isHover && (
-        <>
-          <div className="absolute -top-5 bg-gray-700 text-xs px-2 rounded-sm font-bold whitespace-nowrap">
-            {title}
-          </div>
-          <Overlay />
-        </>
-      )}
+      <div className="absolute -top-8 left-1/2 z-20 -translate-x-1/2 translate-y-5 space-x-2 whitespace-nowrap rounded-md bg-gray-700 py-1 px-3 text-xs opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+        {title}
+      </div>
+      <Overlay id={id} />
     </div>
   );
 };

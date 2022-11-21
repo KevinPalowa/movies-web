@@ -8,7 +8,7 @@ const PosterImage = ({ src, alt }: any) => {
   return (
     <div
       ref={hoverRef}
-      className="cursor-pointer h-full rounded-md relative border-2 border-gray-500 transition hover:border-green-400 hover:border-[2px]"
+      className="relative h-full cursor-pointer rounded-md border-2 border-gray-500 transition hover:border-[2px] hover:border-green-400"
     >
       <Image
         className="rounded-md"
@@ -18,12 +18,12 @@ const PosterImage = ({ src, alt }: any) => {
         alt={alt}
       />
       {isHover ? (
-        <div className="absolute bg-black/50 w-full bottom-0 justify-center space-x-2 flex py-1">
+        <div className="absolute bottom-0 flex w-full justify-center space-x-2 bg-black/50 py-1">
           <FiEye size={"20px"} />
           <FiHeart size={"20px"} />
         </div>
       ) : (
-        <div className="absolute bg-black/50 w-full bottom-0 justify-center space-x-2 hidden">
+        <div className="absolute bottom-0 hidden w-full justify-center space-x-2 bg-black/50">
           <FiEye size={"20px"} />
           <FiHeart size={"20px"} />
         </div>

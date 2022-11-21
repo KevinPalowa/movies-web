@@ -1,5 +1,5 @@
-import Link from "next/link";
 import React, { useState } from "react";
+import Chip from "./Chip";
 
 const TabLists = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -8,44 +8,42 @@ const TabLists = ({ children }: { children: React.ReactNode }) => {
 };
 
 const InfoTab = ({ data }: any) => {
-  const [activeTab, setActiveTab] = useState("cast");
+  const [activeTab, setActiveTab] = useState("casts");
+  const tabs = ["casts", "genres", "crews"];
   return (
     <div>
       <TabLists>
-        <p
-          className={`
+        {tabs.map((tab) => (
+          <p
+            className={`
             ${
-              activeTab === "cast" &&
-              "hover: text-green-500 border-b border-green-500"
-            } cursor-pointer`}
-          onClick={() => setActiveTab("cast")}
-        >
-          Cast
-        </p>
-        <p
-          className={`${
-            activeTab === "genres" && "text-green-500 border-b border-white"
-          } cursor-pointer`}
-          onClick={() => setActiveTab("genres")}
-        >
-          Genres
-        </p>
+              activeTab === tab &&
+              "hover: border-b border-green-500 text-green-500"
+            } cursor-pointer capitalize`}
+            onClick={() => setActiveTab(tab)}
+            key="tab"
+          >
+            {tab}
+          </p>
+        ))}
       </TabLists>
-      <div className="flex mt-3 w-full flex-wrap">
-        {activeTab === "cast"
+      <div className="mt-3 flex w-full flex-wrap">
+        {activeTab === "casts"
           ? data.credits.cast.map((cast: { id: number; name: string }) => (
-              <Link key={cast.id} href={`/cast/${cast.id}`}>
-                <a className="mr-1 mb-0.5 my-0.5 block text-xs bg-gray-800  p-1 items-center whitespace-nowrap">
-                  {cast.name}
-                </a>
-              </Link>
+              <Chip key={cast.id} href={`/cast/${cast.id}`}>
+                {cast.name}
+              </Chip>
             ))
-          : data.genres.map((genre: { id: number; name: string }) => (
-              <Link key={genre.id} href={`/genre/${genre.id}`}>
-                <a className="mr-1 my-0.5 block text-xs bg-gray-800  p-1 items-center whitespace-nowrap">
-                  {genre.name}
-                </a>
-              </Link>
+          : activeTab === "genres"
+          ? data.genres.map((genre: { id: number; name: string }) => (
+              <Chip key={genre.id} href={`/genre/${genre.id}`}>
+                {genre.name}
+              </Chip>
+            ))
+          : data.credits.crew.map((crew: any) => (
+              <Chip key={crew.id} href={`/genre/${crew.id}`}>
+                {crew.name}
+              </Chip>
             ))}
       </div>
     </div>

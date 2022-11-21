@@ -13,27 +13,30 @@ type Props = {
     overview: string;
     release_date: string;
     credits: object;
+    tagline: string;
   };
 };
 const Movie: NextPage<Props> = ({ data }) => {
   console.log(data);
   return (
-    <Layout title={data.title}>
+    <Layout title={`${data.title} (${data.release_date.substring(4, 0)})`}>
       <div className="flex space-x-10">
-        <div className="w-1/4 h-80">
+        <div className="h-80 w-1/4">
           <PosterImage
             src={`https://image.tmdb.org/t/p/w300${data?.poster_path}`}
             alt={data.title}
           />
         </div>
-        <div className="w-3/4">
-          <p className="font-bold text-3xl">
-            {data.title}{" "}
+        <div className="w-3/4 text-gray-400">
+          <p className="text-3xl font-bold">{data.title}</p>
+          <div>
             <span className="text-sm font-normal">
               {data.release_date.substring(4, 0)}
             </span>
-          </p>
-          <p className="mt-5 text-gray-400">{data?.overview}</p>
+            <span> Directed by James cameron</span>
+          </div>
+          <p>{data.tagline}</p>
+          <p className="mt-5">{data?.overview}</p>
           <InfoTab data={data} />
         </div>
       </div>

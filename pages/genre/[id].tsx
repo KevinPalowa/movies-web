@@ -27,6 +27,7 @@ const Genre = () => {
           <div className="mt-3 grid grid-cols-5 gap-3 ">
             {movies?.results.map((movie: MovieType) => (
               <Card
+                href={`/movie/${movie.id}`}
                 title={movie.title}
                 id={movie.id}
                 src={movie.poster_path}
@@ -35,7 +36,7 @@ const Genre = () => {
             ))}
           </div>
           <div className="flex justify-center space-x-3">
-            <p className="text-green-400 rounded-full">1</p>
+            <p className="rounded-full text-green-400">1</p>
             <p>2</p>
             <p>3</p>
             <p>4</p>

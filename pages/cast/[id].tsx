@@ -29,6 +29,7 @@ const Cast: NextPage<CastType> = ({ data }) => {
           <div className="mt-3 grid grid-cols-4 gap-5 ">
             {sorted.map((movie: MovieType) => (
               <Card
+                href={`/movie/${movie.id}`}
                 title={movie.title}
                 id={movie.id}
                 src={movie.poster_path}
@@ -37,11 +38,11 @@ const Cast: NextPage<CastType> = ({ data }) => {
             ))}
           </div>
         </div>
-        <div className="w-3/12 h-80">
+        <div className="h-80 w-3/12">
           <PosterImage
             src={`https://image.tmdb.org/t/p/w300${data.profile_path}`}
           />
-          <p className="text-sm h-14">{data.biography}</p>
+          <p className="h-14 text-sm">{data.biography}</p>
         </div>
       </div>
     </Layout>
