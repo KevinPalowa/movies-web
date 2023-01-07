@@ -16,7 +16,7 @@ const Grid = ({ title, fetchUrl }: Props) => {
   return (
     <>
       <div className="border-b border-b-gray-700 pb-1">
-        <p className="text-gray-400 text-lg">{title}</p>
+        <p className="text-lg text-gray-400">{title}</p>
       </div>
       <div className="mt-3 grid grid-cols-6 gap-3 ">
         {!isLoading

@@ -10,7 +10,7 @@ const SearchBox = () => {
   const [isFocus, setIsFocus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const parentRef = useRef<HTMLDivElement>(null);
-  const debounce = useDebounce<string>(input,500)
+  const debounce = useDebounce<string>(input, 500);
   useOutsideClick(parentRef, () => {
     setIsFocus(false);
   });
@@ -34,14 +34,14 @@ const SearchBox = () => {
       setMovies([]);
     }
   };
-  useEffect(()=>{
-        console.log("fetch");
-        setIsLoading(true);
-        const data =  searchMovie(input).then(res=>{
-        setIsLoading(false);
-        setMovies(res);
-        });
-  },[debounce])
+  useEffect(() => {
+    console.log("fetch");
+    setIsLoading(true);
+    const data = searchMovie(input).then((res) => {
+      setIsLoading(false);
+      setMovies(res);
+    });
+  }, [debounce]);
   return (
     <div ref={parentRef} className="relative">
       {isLoading && <ClipLoader size={25} className="absolute right-0" />}
@@ -50,11 +50,11 @@ const SearchBox = () => {
         onChange={handleChange}
         onFocus={() => setIsFocus(true)}
         /* onBlur={() => setIsFocus(false)} */
-        className="p-1 rounded-sm bg-gray-700 w-56 text-gray-400 focus:bg-white focus:border-none"
+        className="w-56 rounded-sm bg-gray-700 p-1 text-gray-400 focus:border-none focus:bg-white"
         value={input}
       />
       {isFocus && (
-        <ul className="w-full bg-gray-500 max-h-40 z-10 absolute overflow-y-scroll">
+        <ul className="absolute z-10 max-h-40 w-full overflow-y-scroll bg-gray-500">
           {input.length > 0
             ? movies?.map((movie) => (
                 <Link href={`/movie/${movie.id}`} key={movie.id}>
@@ -62,7 +62,7 @@ const SearchBox = () => {
                     onClick={() => {
                       console.log("click");
                     }}
-                    className="hover:bg-green-700 p-2 cursor-pointer text-sm"
+                    className="cursor-pointer p-2 text-sm hover:bg-green-700"
                   >
                     {movie.title} ({movie.release_date?.slice(0, 4)})
                   </li>

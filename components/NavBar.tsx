@@ -20,11 +20,11 @@ const NavLink = ({ children, href }: { children: string; href: string }) => {
 const NavBar = () => {
   return (
     <div className="bg-[#2c3440] py-3">
-      <div className="max-w-4xl w-full flex justify-between mx-auto">
+      <div className="mx-auto flex w-full max-w-4xl justify-between">
         <Link href="/">
           <a className="text-3xl font-bold">Movies</a>
         </Link>
-        <ul className="space-x-3 flex items-center">
+        <ul className="flex items-center space-x-3">
           <NavLink href="/movies">Movies</NavLink>
           <NavLink href="/popular">Popular</NavLink>
         </ul>

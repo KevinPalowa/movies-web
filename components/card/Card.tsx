@@ -15,7 +15,7 @@ const Card: NextPage<Props> = ({ id, src, title }) => {
   return (
     <div
       ref={hoverRef}
-      className="cursor-pointer h-56 rounded-md relative border-2 border-gray-500 transition hover:border-green-400 hover:border-[2px]"
+      className="relative h-56 cursor-pointer rounded-md border-2 border-gray-500 transition hover:border-[2px] hover:border-green-400"
     >
       <Link href={`/movie/${id}`}>
         <a>
@@ -28,7 +28,7 @@ const Card: NextPage<Props> = ({ id, src, title }) => {
               alt={title}
             />
           ) : (
-            <div className="bg-gray-800 w-full h-full font-bold rounded-md  text-center items-center flex justify-center">
+            <div className="flex h-full w-full items-center justify-center  rounded-md bg-gray-800 text-center font-bold">
               {title}
             </div>
           )}
@@ -36,7 +36,7 @@ const Card: NextPage<Props> = ({ id, src, title }) => {
       </Link>
       {isHover && (
         <>
-          <div className="absolute -top-5 bg-gray-700 text-xs px-2 rounded-sm font-bold whitespace-nowrap">
+          <div className="absolute -top-5 whitespace-nowrap rounded-sm bg-gray-700 px-2 text-xs font-bold">
             {title}
           </div>
           <Overlay />

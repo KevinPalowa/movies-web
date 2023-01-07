@@ -16,7 +16,7 @@ const InfoTab = ({ data }: any) => {
           className={`
             ${
               activeTab === "cast" &&
-              "hover: text-green-500 border-b border-green-500"
+              "hover: border-b border-green-500 text-green-500"
             } cursor-pointer`}
           onClick={() => setActiveTab("cast")}
         >
@@ -24,25 +24,25 @@ const InfoTab = ({ data }: any) => {
         </p>
         <p
           className={`${
-            activeTab === "genres" && "text-green-500 border-b border-white"
+            activeTab === "genres" && "border-b border-white text-green-500"
           } cursor-pointer`}
           onClick={() => setActiveTab("genres")}
         >
           Genres
         </p>
       </TabLists>
-      <div className="flex mt-3 w-full flex-wrap">
+      <div className="mt-3 flex w-full flex-wrap">
         {activeTab === "cast"
           ? data.credits.cast.map((cast: { id: number; name: string }) => (
               <Link key={cast.id} href={`/cast/${cast.id}`}>
-                <a className="mr-1 mb-0.5 my-0.5 block text-xs bg-gray-800  p-1 items-center whitespace-nowrap">
+                <a className="my-0.5 mr-1 mb-0.5 block items-center whitespace-nowrap  bg-gray-800 p-1 text-xs">
                   {cast.name}
                 </a>
               </Link>
             ))
           : data.genres.map((genre: { id: number; name: string }) => (
               <Link key={genre.id} href={`/genre/${genre.id}`}>
-                <a className="mr-1 my-0.5 block text-xs bg-gray-800  p-1 items-center whitespace-nowrap">
+                <a className="my-0.5 mr-1 block items-center whitespace-nowrap  bg-gray-800 p-1 text-xs">
                   {genre.name}
                 </a>
               </Link>
