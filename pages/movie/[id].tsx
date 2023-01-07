@@ -4,6 +4,7 @@ import React from "react";
 import Layout from "../../components/Layout";
 import PosterImage from "../../components/image/PosterImage";
 import InfoTab from "../../components/InfoTab";
+import Tabs from "../../components/Tabs";
 
 type Props = {
   data: {
@@ -20,21 +21,21 @@ const Movie: NextPage<Props> = ({ data }) => {
   return (
     <Layout title={data.title}>
       <div className="flex space-x-10">
-        <div className="w-1/4 h-80">
+        <div className="h-80 w-1/4">
           <PosterImage
             src={`https://image.tmdb.org/t/p/w300${data?.poster_path}`}
             alt={data.title}
           />
         </div>
         <div className="w-3/4">
-          <p className="font-bold text-3xl">
+          <p className="text-3xl font-bold">
             {data.title}{" "}
             <span className="text-sm font-normal">
               {data.release_date.substring(4, 0)}
             </span>
           </p>
           <p className="mt-5 text-gray-400">{data?.overview}</p>
-          <InfoTab data={data} />
+          <Tabs data={data} />
         </div>
       </div>
     </Layout>
