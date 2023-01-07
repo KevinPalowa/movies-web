@@ -1,16 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import { MovieType } from "../lib/type";
 import ClipLoader from "react-spinners/ClipLoader";
-import { useOutsideClick } from "../lib/hooks";
+import { useDebounce, useOutsideClick } from "../lib/hooks";
 const SearchBox = () => {
   const [input, setInput] = useState("");
   const [movies, setMovies] = useState<Array<MovieType>>();
   const [isFocus, setIsFocus] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [time, setTime] = useState<any>();
   const parentRef = useRef<HTMLDivElement>(null);
+  const debounce = useDebounce<string>(input,500)
   useOutsideClick(parentRef, () => {
     setIsFocus(false);
   });
@@ -29,21 +29,19 @@ const SearchBox = () => {
     }
   };
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    clearTimeout(time);
     setInput(e.target.value);
     if (e.target.value.length === 0) {
       setMovies([]);
     }
-    setTime(
-      setTimeout(async () => {
+  };
+  useEffect(()=>{
         console.log("fetch");
         setIsLoading(true);
-        const data = await searchMovie(input);
+        const data =  searchMovie(input).then(res=>{
         setIsLoading(false);
-        setMovies(data);
-      }, 500)
-    );
-  };
+        setMovies(res);
+        });
+  },[debounce])
   return (
     <div ref={parentRef} className="relative">
       {isLoading && <ClipLoader size={25} className="absolute right-0" />}
