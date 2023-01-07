@@ -6,8 +6,8 @@ import SearchBox from "../../components/SearchBox";
 const Home = () => {
   return (
     <Layout title="Movies">
-      <div className="flex justify-end items-center space-x-2">
-        <p className="text-gray-400 text-sm">FIND A FILM</p>
+      <div className="flex items-center justify-end space-x-2">
+        <p className="text-sm text-gray-400">FIND A FILM</p>
         <SearchBox />
       </div>
       <Grid title="Populars" fetchUrl={requests.requestPopular} />
