@@ -1,55 +1,52 @@
-import axios from "axios";
-import { GetServerSideProps, NextPage } from "next";
+import { useGetMovieDetails } from "@/hooks/movie";
+import Image from "next/image";
+import dayjs from "dayjs";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import React from "react";
-import Layout from "../../components/Layout";
-import PosterImage from "../../components/image/PosterImage";
-import InfoTab from "../../components/InfoTab";
-import Tabs from "../../components/Tabs";
+import { z } from "zod";
 
-type Props = {
-  data: {
-    title: string;
-    poster_path: string;
-    original_title: string;
-    overview: string;
-    release_date: string;
-    credits: object;
-  };
-};
-const Movie: NextPage<Props> = ({ data }) => {
-  console.log(data);
+export default function MovieDetailsPage() {
+  const { query } = useRouter();
+  const { data, isLoading, isError, error } = useGetMovieDetails({
+    id: Number(query.id),
+    append: ["release_dates", "credits"],
+  });
+  if (isLoading) {
+    return "isLoading...";
+  }
+  if (isError) {
+    return error.response?.data.status_message;
+  }
   return (
-    <Layout title={data.title}>
-      <div className="flex space-x-10">
-        <div className="h-80 w-1/4">
-          <PosterImage
-            src={`https://image.tmdb.org/t/p/w300${data?.poster_path}`}
-            alt={data.title}
+    <>
+      <Head>
+        <title>{`${data.title}  (${dayjs(data.release_date).format(
+          "YYYY"
+        )})`}</title>
+      </Head>
+      <div className="relative h-96 w-full">
+        <Image
+          alt="Backdrop Image"
+          src={`https://image.tmdb.org/t/p/original/${data.backdrop_path}`}
+          fill
+          className="object-cover"
+        />
+      </div>
+      <div className="flex bg-stone-600">
+        <div className="relative h-80 w-52 rounded-lg border border-slate-200">
+          <Image
+            alt="Poster Image"
+            src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
+            fill
+            className="object-cover rounded-lg"
           />
         </div>
-        <div className="w-3/4">
-          <p className="text-3xl font-bold">
-            {data.title}{" "}
-            <span className="text-sm font-normal">
-              {data.release_date.substring(4, 0)}
-            </span>
-          </p>
-          <p className="mt-5 text-gray-400">{data?.overview}</p>
-          <Tabs data={data} />
+        <div>
+          <p>{data.title}</p>
+          <p>{data.overview}</p>
         </div>
       </div>
-    </Layout>
+    </>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  // const router = useRouter();
-  // const { id } = router.query;
-  const res = await axios.get(
-    `https://api.themoviedb.org/3/movie/${query.id}?api_key=${process.env.API_KEY}&language=en-US&append_to_response=credits`
-  );
-  return {
-    props: { data: res.data },
-  };
-};
-export default Movie;
+}
