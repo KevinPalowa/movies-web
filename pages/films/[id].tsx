@@ -39,7 +39,7 @@ export default function MovieDetailsPage() {
             alt="Poster Image"
             src={`https://image.tmdb.org/t/p/original/${data.poster_path}`}
             fill
-            className="object-cover rounded-lg"
+            className="rounded-lg object-cover"
           />
         </div>
         <div>
